@@ -47,6 +47,10 @@ try {
 }
 ```
 
+## Documentation
+
+Full API documentation is available at [https://dubisdev.github.io/crtm-api/](https://dubisdev.github.io/crtm-api/)
+
 ## Development
 
 ```bash
