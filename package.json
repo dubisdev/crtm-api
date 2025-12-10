@@ -1,0 +1,56 @@
+{
+  "name": "@dubisdev/crtm-api",
+  "version": "0.1.0",
+  "description": "A type-safe API client for CRTM (Madrid public transport) with clean architecture",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./stops": {
+      "types": "./dist/stops/index.d.ts",
+      "default": "./dist/stops/index.js"
+    },
+    "./lines": {
+      "types": "./dist/lines/index.d.ts",
+      "default": "./dist/lines/index.js"
+    },
+    "./stop-times": {
+      "types": "./dist/stop-times/index.d.ts",
+      "default": "./dist/stop-times/index.js"
+    },
+    "./errors": {
+      "types": "./dist/shared/errors/index.d.ts",
+      "default": "./dist/shared/errors/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "sideEffects": false,
+  "scripts": {
+    "build": "bun build.ts",
+    "test": "bun vitest --run",
+    "test:watch": "bun vitest",
+    "test:coverage": "bun vitest --coverage",
+    "docs": "typedoc"
+  },
+  "author": "David Jiménez <dubisdev@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/bun": "1.3.4",
+    "@vitest/coverage-v8": "4.0.15",
+    "typedoc": "0.28.15",
+    "vitest": "4.0.15"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "valibot": "1.2.0"
+  }
+}

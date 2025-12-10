@@ -1,0 +1,18 @@
+{
+    "$schema": "https://typedoc.org/schema.json",
+    "entryPoints": [
+        "src/index.ts"
+    ],
+    "out": "docs",
+    "plugin": [],
+    "excludePrivate": true,
+    "excludeProtected": true,
+    "excludeExternals": true,
+    "readme": "README.md",
+    "navigationLinks": {
+        "GitHub": "https://github.com/dubisdev/emt-api"
+    },
+    "sidebarLinks": {
+        "npm": "https://www.npmjs.com/package/@dubisdev/crtm-api"
+    }
+}
