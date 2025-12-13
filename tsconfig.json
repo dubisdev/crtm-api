@@ -14,8 +14,8 @@
     "verbatimModuleSyntax": true,
     // Emit configuration for publishing
     "declaration": true,
-    "declarationMap": true,
-    "sourceMap": true,
+    "declarationMap": false,
+    "sourceMap": false,
     "outDir": "./dist",
     "rootDir": "./src",
     // Best practices

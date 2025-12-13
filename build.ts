@@ -18,7 +18,7 @@ await build({
         "./src/shared/errors/index.ts",
     ],
     outdir: "./dist",
-    target: "browser",
+    target: "node",
     format: "esm",
     splitting: true,
     minify: true,
