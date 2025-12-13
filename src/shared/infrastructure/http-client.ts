@@ -13,7 +13,7 @@ export class HttpClient {
         }
 
         try {
-            const response = await fetch(url);
+            const response = await fetch(url.toString());
 
             if (!response.ok) {
                 if (response.status === 404) {
