@@ -8,7 +8,12 @@ export class CrtmStopTimeRepository extends BaseCrtmRepository implements StopTi
     async findByStopCode(stopCode: string): Promise<StopTime[]> {
         return this.fetchAndMap(
             CRTM_API.ENDPOINTS.STOP_TIMES,
-            { codStop: stopCode },
+            {
+                codStop: stopCode,
+                type: "1",
+                orderBy: "2",
+                stopTimesByIti: "3"
+            },
             mapStopTimeResponseToDomain
         );
     }

@@ -21,8 +21,7 @@ await build({
     target: "browser",
     format: "esm",
     splitting: true,
-    minify: false,
-    sourcemap: "external",
+    minify: true,
 });
 
 console.log("✅ Build complete!");
