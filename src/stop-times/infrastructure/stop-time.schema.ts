@@ -22,7 +22,7 @@ const TimeEntrySchema = v.object({
 export const StopTimesResponseSchema = v.object({
     stopTimes: v.object({
         times: v.object({
-            Time: v.union([TimeEntrySchema, v.array(TimeEntrySchema)]),
+            Time: v.optional(v.union([TimeEntrySchema, v.array(TimeEntrySchema)])),
         }),
     }),
 });

@@ -6,7 +6,7 @@ import { StopTimesResponseSchema } from "./stop-time.schema";
 export const mapStopTimeResponseToDomain = (data: unknown): StopTime[] => {
     try {
         const validated = v.parse(StopTimesResponseSchema, data);
-        const times = validated.stopTimes.times.Time;
+        const times = validated.stopTimes.times.Time || [];
 
         // Handle single or multiple times
         const timeArray = Array.isArray(times) ? times : [times];
