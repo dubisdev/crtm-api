@@ -1,6 +1,6 @@
 {
   "name": "@dubisdev/crtm-api",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "A type-safe API client for CRTM (Madrid public transport) with clean architecture",
   "type": "module",
   "main": "./dist/index.js",
