@@ -1,5 +1,5 @@
-import type { StopTime } from "./stop-time.entity";
+import type { StopTimesInfo } from "./stop-times-info.entity";
 
 export interface StopTimeRepository {
-    findByStopCode(stopCode: string): Promise<StopTime[]>;
+    findByStopCode(stopCode: string): Promise<StopTimesInfo>;
 }

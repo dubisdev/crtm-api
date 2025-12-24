@@ -66,7 +66,7 @@ describe("CrtmLineRepository", () => {
 
         expect(mockHttpClient.get).toHaveBeenCalledTimes(1);
         expect(mockHttpClient.get).toHaveBeenCalledWith(
-            "GetLinesInformation.php",
+            "GetLines.php",
             { codLine: "456" }
         );
     });

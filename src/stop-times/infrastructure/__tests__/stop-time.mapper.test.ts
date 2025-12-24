@@ -6,6 +6,21 @@ describe("mapStopTimeResponseToDomain", () => {
     it("should map valid response with single time to StopTime array", () => {
         const response = {
             stopTimes: {
+                stop: {
+                    codStop: "1_1",
+                    shortCodStop: "1",
+                    name: "Test Stop Name"
+                },
+                linesStatus: {
+                    LineStatus: [
+                        {
+                            line: {
+                                codLine: "123",
+                                shortDescription: "Short 1"
+                            },
+                        }
+                    ],
+                },
                 times: {
                     Time: {
                         line: {
@@ -27,21 +42,37 @@ describe("mapStopTimeResponseToDomain", () => {
 
         const stopTimes = mapStopTimeResponseToDomain(response);
 
-        expect(stopTimes).toHaveLength(1);
-        expect(stopTimes[0].lineCode).toBe("123");
-        expect(stopTimes[0].lineShortDescription).toBe("Short");
-        expect(stopTimes[0].lineDescription).toBe("Full Description");
-        expect(stopTimes[0].direction).toBe(1);
-        expect(stopTimes[0].destination).toBe("Final Stop");
-        expect(stopTimes[0].time).toBe("15:30");
-        expect(stopTimes[0].destinationStopCode).toBe("8_99999");
-        expect(stopTimes[0].destinationStopName).toBe("Destination Name");
+        expect(stopTimes.times).toHaveLength(1);
+        expect(stopTimes.times[0].lineCode).toBe("123");
+        expect(stopTimes.times[0].lineShortDescription).toBe("Short");
+        expect(stopTimes.times[0].lineDescription).toBe("Full Description");
+        expect(stopTimes.times[0].direction).toBe(1);
+        expect(stopTimes.times[0].destination).toBe("Final Stop");
+        expect(stopTimes.times[0].time).toBe("15:30");
+        expect(stopTimes.times[0].destinationStopCode).toBe("8_99999");
+        expect(stopTimes.times[0].destinationStopName).toBe("Destination Name");
     });
 
     it("should map valid response with multiple times to StopTime array", () => {
         const response = {
             stopTimes: {
+                stop: {
+                    codStop: "1_1",
+                    shortCodStop: "1",
+                    name: "Test Stop Name"
+                },
+                linesStatus: {
+                    LineStatus: [
+                        {
+                            line: {
+                                codLine: "123",
+                                shortDescription: "Short 1"
+                            },
+                        }
+                    ],
+                },
                 times: {
+
                     Time: [
                         {
                             line: {
@@ -78,11 +109,11 @@ describe("mapStopTimeResponseToDomain", () => {
 
         const stopTimes = mapStopTimeResponseToDomain(response);
 
-        expect(stopTimes).toHaveLength(2);
-        expect(stopTimes[0].lineCode).toBe("123");
-        expect(stopTimes[0].time).toBe("15:30");
-        expect(stopTimes[1].lineCode).toBe("456");
-        expect(stopTimes[1].time).toBe("16:00");
+        expect(stopTimes.times).toHaveLength(2);
+        expect(stopTimes.times[0].lineCode).toBe("123");
+        expect(stopTimes.times[0].time).toBe("15:30");
+        expect(stopTimes.times[1].lineCode).toBe("456");
+        expect(stopTimes.times[1].time).toBe("16:00");
     });
 
     it("should throw ResponseMismatchError for empty object", () => {

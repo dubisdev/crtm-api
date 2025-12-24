@@ -22,7 +22,7 @@ describe("HttpClient", () => {
 
             expect(result).toEqual(mockData);
             expect(global.fetch).toHaveBeenCalledWith(
-                new URL("https://api.example.com/endpoint")
+                new URL("https://api.example.com/endpoint").toString()
             );
         });
 
@@ -39,7 +39,7 @@ describe("HttpClient", () => {
             expectedUrl.searchParams.append("param1", "value1");
             expectedUrl.searchParams.append("param2", "value2");
 
-            expect(global.fetch).toHaveBeenCalledWith(expectedUrl);
+            expect(global.fetch).toHaveBeenCalledWith(expectedUrl.toString());
         });
 
         it("should throw NotFoundError for 404 status", async () => {

@@ -1,9 +1,10 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import { CrtmStopTimeRepository } from "../stop-time.repository.crtm";
 import { NotFoundError, NetworkError } from "../../../shared/errors";
+import { StopTimeRepository } from "../../domain/stop-time.repository";
 
 describe("CrtmStopTimeRepository", () => {
-    let repository: CrtmStopTimeRepository;
+    let repository: StopTimeRepository;
     let mockHttpClient: any;
 
     beforeEach(() => {
@@ -17,6 +18,21 @@ describe("CrtmStopTimeRepository", () => {
     it("should fetch and map stop times by stop code successfully", async () => {
         const mockResponse = {
             stopTimes: {
+                stop: {
+                    codStop: "1_1",
+                    shortCodStop: "1",
+                    name: "Test Stop Name"
+                },
+                linesStatus: {
+                    LineStatus: [
+                        {
+                            line: {
+                                codLine: "123",
+                                shortDescription: "Short 1"
+                            }
+                        }
+                    ],
+                },
                 times: {
                     Time: [
                         {
@@ -56,22 +72,42 @@ describe("CrtmStopTimeRepository", () => {
 
         const result = await repository.findByStopCode("8_21044");
 
-        expect(result).toHaveLength(2);
-        expect(result[0]).toBeDefined();
-        expect(result[0].lineCode).toBe("123");
-        expect(result[0].time).toBe("15:30");
-        expect(result[1].lineCode).toBe("456");
-        expect(result[1].time).toBe("16:00");
+        expect(result.times).toHaveLength(2);
+        expect(result.times[0]).toBeDefined();
+        expect(result.times[0].lineCode).toBe("123");
+        expect(result.times[0].time).toBe("15:30");
+        expect(result.times[1].lineCode).toBe("456");
+        expect(result.times[1].time).toBe("16:00");
 
         expect(mockHttpClient.get).toHaveBeenCalledWith(
             expect.any(String),
-            { codStop: "8_21044" }
+            {
+                codStop: "8_21044",
+                orderBy: "2",
+                stopTimesByIti: "3",
+                type: "1",
+            }
         );
     });
 
     it("should call HttpClient with correct endpoint and params", async () => {
         const mockResponse = {
             stopTimes: {
+                stop: {
+                    codStop: "1_1",
+                    shortCodStop: "1",
+                    name: "Test Stop Name"
+                },
+                linesStatus: {
+                    LineStatus: [
+                        {
+                            line: {
+                                codLine: "123",
+                                shortDescription: "Short 1"
+                            },
+                        }
+                    ],
+                },
                 times: {
                     Time: {
                         line: {
@@ -98,7 +134,11 @@ describe("CrtmStopTimeRepository", () => {
         expect(mockHttpClient.get).toHaveBeenCalledTimes(1);
         expect(mockHttpClient.get).toHaveBeenCalledWith(
             "GetStopsTimes.php",
-            { codStop: "8_99999" }
+            {
+                codStop: "8_99999", orderBy: "2",
+                stopTimesByIti: "3",
+                type: "1",
+            }
         );
     });
 

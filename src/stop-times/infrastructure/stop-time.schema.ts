@@ -19,10 +19,25 @@ const TimeEntrySchema = v.object({
     destinationStop: DestinationStopSchema,
 });
 
+const LineStatusSchema = v.object({
+    line: v.object({
+        codLine: v.string(),
+        shortDescription: v.string(),
+    })
+})
+
 export const StopTimesResponseSchema = v.object({
     stopTimes: v.object({
+        stop: v.object({
+            codStop: v.string(),
+            shortCodStop: v.string(),
+            name: v.string(),
+        }),
         times: v.object({
             Time: v.optional(v.union([TimeEntrySchema, v.array(TimeEntrySchema)])),
+        }),
+        linesStatus: v.object({
+            LineStatus: v.union([LineStatusSchema, v.array(LineStatusSchema)]),
         }),
     }),
 });
